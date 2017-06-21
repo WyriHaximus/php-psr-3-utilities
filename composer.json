@@ -1,0 +1,24 @@
+{
+  "name": "wyrihaximus/psr-3-utilities",
+  "description": "Wrapping ticks into a promise",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cees-Jan Kiewiet",
+      "email": "ceesjank@gmail.com",
+      "homepage": "http://wyrihaximus.net/"
+    }
+  ],
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "api-clients/test-utilities": "^4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "WyriHaximus\\PSR3\\": "src/"
+    },
+    "files": ["src/functions_include.php"]
+  }
+}
