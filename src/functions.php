@@ -17,7 +17,7 @@ function processPlaceHolders(string $message, array $context): string
 
     $replacements = [];
     foreach ($context as $key => $value) {
-        $replacements['{'.$key.'}'] = $this->formatValue($value);
+        $replacements['{'.$key.'}'] = formatValue($value);
     }
 
     return strtr($message, $replacements);
