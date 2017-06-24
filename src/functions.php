@@ -1,12 +1,12 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace WyriHaximus\PSR3;
 
-use Psr\Log\LogLevel;
 use Psr\Log\InvalidArgumentException;
+use Psr\Log\LogLevel;
 
 /**
- * Logging levels PSR-3 LogLevel enum
+ * Logging levels PSR-3 LogLevel enum.
  *
  * @var array $levels Logging levels
  */
@@ -22,8 +22,8 @@ const LOG_LEVELS = [
 ];
 
 /**
- * @param string $message
- * @param array $context
+ * @param  string $message
+ * @param  array  $context
  * @return string
  *
  * Method copied from: https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php
@@ -72,12 +72,15 @@ function normalizeContext(array $context): array
     return $context;
 }
 
-function checkCorrectLogLevel(string $level)
+function checkCorrectLogLevel(string $level): bool
 {
+    $level = strtolower($level);
     $levels = LOG_LEVELS;
     if (!isset($levels[$level])) {
         throw new InvalidArgumentException(
-            'Level "'.$level.'" is not defined, use one of: '.implode(', ', array_keys(LOG_LEVELS))
+            'Level "' . $level . '" is not defined, use one of: '.implode(', ', array_keys(LOG_LEVELS))
         );
     }
+
+    return true;
 }
