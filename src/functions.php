@@ -22,11 +22,14 @@ const LOG_LEVELS = [
 ];
 
 /**
+ * Functions in this file are a continuation of the code from this
+ * file https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php
+ */
+
+/**
  * @param  string $message
  * @param  array  $context
  * @return string
- *
- * Method copied from: https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php
  */
 function processPlaceHolders(string $message, array $context): string
 {
