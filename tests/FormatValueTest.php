@@ -11,12 +11,12 @@ final class FormatValueTest extends TestCase
     {
         yield [
             null,
-            null,
+            '',
         ];
 
         yield [
             1337,
-            1337,
+            '1337',
         ];
 
         yield [
@@ -26,18 +26,17 @@ final class FormatValueTest extends TestCase
 
         yield [
             1.337,
-            1.337,
+            '1.337',
         ];
 
-        $toString = new class() {
-            public function __toString()
-            {
-                return 'foo.bar';
-            }
-        };
         yield [
-            $toString,
-            $toString,
+            new class() {
+                public function __toString()
+                {
+                    return 'foo.bar';
+                }
+            },
+            'foo.bar',
         ];
 
         yield [

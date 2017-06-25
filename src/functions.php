@@ -23,7 +23,7 @@ const LOG_LEVELS = [
 
 /**
  * Functions in this file are a continuation of the code from this
- * file https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php
+ * https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php file.
  */
 
 /**
@@ -45,10 +45,10 @@ function processPlaceHolders(string $message, array $context): string
     return strtr($message, $replacements);
 }
 
-function formatValue($value)
+function formatValue($value): string
 {
     if (is_null($value) || is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
-        return $value;
+        return (string)$value;
     }
 
     if (is_object($value)) {
