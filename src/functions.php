@@ -99,7 +99,7 @@ function checkCorrectLogLevel(string $level): bool
     $level = \strtolower($level);
     $levels = LOG_LEVELS;
     if (!isset($levels[$level])) {
-        throw new \InvalidArgumentException(
+        throw new InvalidArgumentException(
             'Level "' . $level . '" is not defined, use one of: '.\implode(', ', \array_keys(LOG_LEVELS))
         );
     }
