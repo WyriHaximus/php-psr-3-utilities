@@ -69,6 +69,19 @@ final class NormalizeContextTest extends TestCase
                 ],
             ],
         ];
+
+        yield [
+            [
+                [
+                    'stdClass' => new \StdClass(),
+                ],
+            ],
+            [
+                [
+                    'stdClass' => '[object stdClass]',
+                ],
+            ],
+        ];
     }
 
     /**

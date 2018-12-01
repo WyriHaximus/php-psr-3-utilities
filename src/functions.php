@@ -74,27 +74,6 @@ function normalizeContext(array $context): array
             $context[$index] = \sprintf('[resource] (%s)', \get_resource_type($value));
             continue;
         }
-    }
-
-    return $context;
-}
-
-function normalizeContextWithFormatValue(array $context): array
-{
-    foreach ($context as $index => $value) {
-        if ($value instanceof \JsonSerializable) {
-            $value = $value->jsonSerialize();
-        }
-
-        if (\is_array($value)) {
-            $context[$index] = normalizeContextWithFormatValue($value);
-            continue;
-        }
-
-        if (\is_resource($value)) {
-            $context[$index] = \sprintf('[resource] (%s)', \get_resource_type($value));
-            continue;
-        }
 
         $context[$index] = formatValue($value);
     }
