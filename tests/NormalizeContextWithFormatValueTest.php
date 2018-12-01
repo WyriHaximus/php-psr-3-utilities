@@ -12,41 +12,7 @@ final class NormalizeContextWithFormatValueTest extends TestCase
 {
     public function provideContexts()
     {
-        yield [
-            [],
-            [],
-        ];
-
-        yield [
-            [
-                [],
-            ],
-            [
-                [],
-            ],
-        ];
-
-        yield [
-            [
-                'stdout' => STDOUT,
-            ],
-            [
-                'stdout' => '[resource] (stream)',
-            ],
-        ];
-
-        yield [
-            [
-                [
-                    'stdout' => STDOUT,
-                ],
-            ],
-            [
-                [
-                    'stdout' => '[resource] (stream)',
-                ],
-            ],
-        ];
+        yield from (new NormalizeContextTest())->provideContexts();
 
         yield [
             [

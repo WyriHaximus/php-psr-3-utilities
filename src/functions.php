@@ -61,6 +61,10 @@ function formatValue($value): string
 function normalizeContext(array $context): array
 {
     foreach ($context as $index => $value) {
+        if ($value instanceof \JsonSerializable) {
+            $value = $value->jsonSerialize();
+        }
+
         if (\is_array($value)) {
             $context[$index] = normalizeContext($value);
             continue;
@@ -78,6 +82,10 @@ function normalizeContext(array $context): array
 function normalizeContextWithFormatValue(array $context): array
 {
     foreach ($context as $index => $value) {
+        if ($value instanceof \JsonSerializable) {
+            $value = $value->jsonSerialize();
+        }
+
         if (\is_array($value)) {
             $context[$index] = normalizeContextWithFormatValue($value);
             continue;

@@ -47,6 +47,28 @@ final class NormalizeContextTest extends TestCase
                 ],
             ],
         ];
+
+        yield [
+            [
+                [
+                    'json_serializable' => new class() implements \JsonSerializable {
+                        public function jsonSerialize()
+                        {
+                            return [
+                                'foo' => 'bar',
+                            ];
+                        }
+                    },
+                ],
+            ],
+            [
+                [
+                    'json_serializable' => [
+                        'foo' => 'bar',
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**
