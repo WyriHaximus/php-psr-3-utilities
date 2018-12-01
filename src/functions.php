@@ -79,7 +79,7 @@ function normalizeContextWithFormatValue(array $context): array
 {
     foreach ($context as $index => $value) {
         if (\is_array($value)) {
-            $context[$index] = normalizeContext($value);
+            $context[$index] = normalizeContextWithFormatValue($value);
             continue;
         }
 
