@@ -75,6 +75,25 @@ function normalizeContext(array $context): array
     return $context;
 }
 
+function normalizeContextWithFormatValue(array $context): array
+{
+    foreach ($context as $index => $value) {
+        if (\is_array($value)) {
+            $context[$index] = normalizeContext($value);
+            continue;
+        }
+
+        if (\is_resource($value)) {
+            $context[$index] = \sprintf('[resource] (%s)', \get_resource_type($value));
+            continue;
+        }
+
+        $context[$index] = formatValue($value);
+    }
+
+    return $context;
+}
+
 function checkCorrectLogLevel(string $level): bool
 {
     $level = \strtolower($level);
