@@ -5,6 +5,9 @@ namespace WyriHaximus\Tests\PSR3;
 use PHPUnit\Framework\TestCase;
 use function WyriHaximus\PSR3\normalizeContext;
 
+/**
+ * @internal
+ */
 final class NormalizeContextTest extends TestCase
 {
     public function provideContexts()
@@ -49,7 +52,7 @@ final class NormalizeContextTest extends TestCase
     /**
      * @dataProvider provideContexts
      */
-    public function testNormalizeContext(array $context, array $expectedOutput)
+    public function testNormalizeContext(array $context, array $expectedOutput): void
     {
         self::assertSame($expectedOutput, normalizeContext($context));
     }

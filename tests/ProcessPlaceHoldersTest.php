@@ -5,6 +5,9 @@ namespace WyriHaximus\Tests\PSR3;
 use PHPUnit\Framework\TestCase;
 use function WyriHaximus\PSR3\processPlaceHolders;
 
+/**
+ * @internal
+ */
 final class ProcessPlaceHoldersTest extends TestCase
 {
     public function provideForTestProcessPlaceHolders()
@@ -39,7 +42,7 @@ final class ProcessPlaceHoldersTest extends TestCase
      *
      * @dataProvider provideForTestProcessPlaceHolders
      */
-    public function testProcessPlaceHolders(string $message, array $context, string $expectedOutput)
+    public function testProcessPlaceHolders(string $message, array $context, string $expectedOutput): void
     {
         self::assertSame($expectedOutput, processPlaceHolders($message, $context));
     }

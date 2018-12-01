@@ -33,7 +33,7 @@ const LOG_LEVELS = [
  */
 function processPlaceHolders(string $message, array $context): string
 {
-    if (false === strpos($message, '{')) {
+    if (false === \strpos($message, '{')) {
         return $message;
     }
 
@@ -42,32 +42,32 @@ function processPlaceHolders(string $message, array $context): string
         $replacements['{'.$key.'}'] = formatValue($value);
     }
 
-    return strtr($message, $replacements);
+    return \strtr($message, $replacements);
 }
 
 function formatValue($value): string
 {
-    if (is_null($value) || is_scalar($value) || (is_object($value) && method_exists($value, '__toString'))) {
+    if (\is_null($value) || \is_scalar($value) || (\is_object($value) && \method_exists($value, '__toString'))) {
         return (string)$value;
     }
 
-    if (is_object($value)) {
-        return '[object '.get_class($value).']';
+    if (\is_object($value)) {
+        return '[object '.\get_class($value).']';
     }
 
-    return '['.gettype($value).']';
+    return '['.\gettype($value).']';
 }
 
 function normalizeContext(array $context): array
 {
     foreach ($context as $index => $value) {
-        if (is_array($value)) {
+        if (\is_array($value)) {
             $context[$index] = normalizeContext($value);
             continue;
         }
 
-        if (is_resource($value)) {
-            $context[$index] = sprintf('[resource] (%s)', get_resource_type($value));
+        if (\is_resource($value)) {
+            $context[$index] = \sprintf('[resource] (%s)', \get_resource_type($value));
             continue;
         }
     }
@@ -77,11 +77,11 @@ function normalizeContext(array $context): array
 
 function checkCorrectLogLevel(string $level): bool
 {
-    $level = strtolower($level);
+    $level = \strtolower($level);
     $levels = LOG_LEVELS;
     if (!isset($levels[$level])) {
-        throw new InvalidArgumentException(
-            'Level "' . $level . '" is not defined, use one of: '.implode(', ', array_keys(LOG_LEVELS))
+        throw new \InvalidArgumentException(
+            'Level "' . $level . '" is not defined, use one of: '.\implode(', ', \array_keys(LOG_LEVELS))
         );
     }
 

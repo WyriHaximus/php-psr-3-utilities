@@ -7,6 +7,9 @@ use Psr\Log\InvalidArgumentException;
 use const WyriHaximus\PSR3\LOG_LEVELS;
 use function WyriHaximus\PSR3\checkCorrectLogLevel;
 
+/**
+ * @internal
+ */
 final class CheckCorrectLogLevelTest extends TestCase
 {
     public function provideCorrectLogLevels()
@@ -20,7 +23,7 @@ final class CheckCorrectLogLevelTest extends TestCase
      * @dataProvider provideCorrectLogLevels
      * @param mixed $logLevel
      */
-    public function testCorrectLogLevel($logLevel)
+    public function testCorrectLogLevel($logLevel): void
     {
         self::assertTrue(checkCorrectLogLevel($logLevel));
     }
@@ -44,7 +47,7 @@ final class CheckCorrectLogLevelTest extends TestCase
      * @dataProvider provideInCorrectLogLevels
      * @param mixed $logLevel
      */
-    public function testIncorrectLogLevel($logLevel)
+    public function testIncorrectLogLevel($logLevel): void
     {
         self::expectException(InvalidArgumentException::class);
         checkCorrectLogLevel($logLevel);

@@ -5,6 +5,9 @@ namespace WyriHaximus\Tests\PSR3;
 use PHPUnit\Framework\TestCase;
 use function WyriHaximus\PSR3\formatValue;
 
+/**
+ * @internal
+ */
 final class FormatValueTest extends TestCase
 {
     public function provideValues()
@@ -58,7 +61,7 @@ final class FormatValueTest extends TestCase
      *
      * @dataProvider provideValues
      */
-    public function testFormatValue($value, $expectedValue)
+    public function testFormatValue($value, $expectedValue): void
     {
         self::assertSame($expectedValue, formatValue($value));
     }
