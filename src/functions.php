@@ -65,6 +65,10 @@ function normalizeContext(array $context): array
             $value = $value->jsonSerialize();
         }
 
+        if ($value instanceof \DateTimeInterface) {
+            $value = \json_decode(\json_encode($value), true);
+        }
+
         if (\is_array($value)) {
             $context[$index] = normalizeContext($value);
             continue;
