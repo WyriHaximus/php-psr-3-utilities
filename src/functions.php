@@ -66,7 +66,7 @@ function normalizeContext(array $context): array
         }
 
         if ($value instanceof \DateTimeInterface) {
-            $value = \json_decode(\json_encode($value), true);
+            $value = (array)$value;
         }
 
         if (\is_array($value)) {
