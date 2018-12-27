@@ -28,7 +28,7 @@ final class NormalizeContextTest extends TestCase
 
         yield [
             [
-                'stdout' => STDOUT,
+                'stdout' => \STDOUT,
             ],
             [
                 'stdout' => '[resource] (stream)',
@@ -38,7 +38,7 @@ final class NormalizeContextTest extends TestCase
         yield [
             [
                 [
-                    'stdout' => STDOUT,
+                    'stdout' => \STDOUT,
                 ],
             ],
             [

@@ -48,7 +48,7 @@ final class FormatValueTest extends TestCase
         ];
 
         yield [
-            STDOUT,
+            \STDOUT,
             '[resource]',
         ];
     }
