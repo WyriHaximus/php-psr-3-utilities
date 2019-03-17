@@ -4,8 +4,8 @@ namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
-use const WyriHaximus\PSR3\LOG_LEVELS;
 use function WyriHaximus\PSR3\checkCorrectLogLevel;
+use const WyriHaximus\PSR3\LOG_LEVELS;
 
 /**
  * @internal
