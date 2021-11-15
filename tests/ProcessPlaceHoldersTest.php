@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\TestCase;
+
 use function WyriHaximus\PSR3\processPlaceHolders;
 
 /**
@@ -10,7 +13,10 @@ use function WyriHaximus\PSR3\processPlaceHolders;
  */
 final class ProcessPlaceHoldersTest extends TestCase
 {
-    public function provideForTestProcessPlaceHolders()
+    /**
+     * @return iterable<array<int, array<string, string>|string>>
+     */
+    public function provideForTestProcessPlaceHolders(): iterable
     {
         yield [
             'foo.bar',
@@ -20,25 +26,19 @@ final class ProcessPlaceHoldersTest extends TestCase
 
         yield [
             'foo.{var}',
-            [
-                'var' => 'bar',
-            ],
+            ['var' => 'bar'],
             'foo.bar',
         ];
 
         yield [
             'foo.{var}',
-            [
-                'voor' => 'bar',
-            ],
+            ['voor' => 'bar'],
             'foo.{var}',
         ];
     }
 
     /**
-     * @param string $message
-     * @param array  $context
-     * @param string $expectedOutput
+     * @param array<array<mixed>> $context
      *
      * @dataProvider provideForTestProcessPlaceHolders
      */
