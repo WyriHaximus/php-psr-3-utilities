@@ -1,10 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
+
 use function WyriHaximus\PSR3\checkCorrectLogLevel;
+
 use const WyriHaximus\PSR3\LOG_LEVELS;
 
 /**
@@ -12,7 +16,10 @@ use const WyriHaximus\PSR3\LOG_LEVELS;
  */
 final class CheckCorrectLogLevelTest extends TestCase
 {
-    public function provideCorrectLogLevels()
+    /**
+     * @return iterable<array<string>>
+     */
+    public function provideCorrectLogLevels(): iterable
     {
         foreach (LOG_LEVELS as $logLevel) {
             yield [$logLevel];
@@ -21,33 +28,28 @@ final class CheckCorrectLogLevelTest extends TestCase
 
     /**
      * @dataProvider provideCorrectLogLevels
-     * @param mixed $logLevel
      */
-    public function testCorrectLogLevel($logLevel): void
+    public function testCorrectLogLevel(string $logLevel): void
     {
         self::assertTrue(checkCorrectLogLevel($logLevel));
     }
 
-    public function provideInCorrectLogLevels()
+    /**
+     * @return iterable<array<string>>
+     */
+    public function provideInCorrectLogLevels(): iterable
     {
-        yield [
-            'yes',
-        ];
+        yield ['yes'];
 
-        yield [
-            'null',
-        ];
+        yield ['null'];
 
-        yield [
-            'meltdown',
-        ];
+        yield ['meltdown'];
     }
 
     /**
      * @dataProvider provideInCorrectLogLevels
-     * @param mixed $logLevel
      */
-    public function testIncorrectLogLevel($logLevel): void
+    public function testIncorrectLogLevel(string $logLevel): void
     {
         self::expectException(InvalidArgumentException::class);
         checkCorrectLogLevel($logLevel);

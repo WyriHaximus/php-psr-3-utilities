@@ -1,16 +1,25 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\TestCase;
+use stdClass;
+
 use function WyriHaximus\PSR3\formatValue;
+
+use const STDOUT;
 
 /**
  * @internal
  */
 final class FormatValueTest extends TestCase
 {
-    public function provideValues()
+    /**
+     * @return iterable<array<int, mixed>>
+     */
+    public function provideValues(): iterable
     {
         yield [
             null,
@@ -33,8 +42,8 @@ final class FormatValueTest extends TestCase
         ];
 
         yield [
-            new class() {
-                public function __toString()
+            new class () {
+                public function __toString(): string
                 {
                     return 'foo.bar';
                 }
@@ -43,25 +52,20 @@ final class FormatValueTest extends TestCase
         ];
 
         yield [
-            new \stdClass(),
+            new stdClass(),
             '[object stdClass]',
         ];
 
         yield [
-            \STDOUT,
+            STDOUT,
             '[resource]',
         ];
     }
 
     /**
-     * @param string $message
-     * @param array  $context
-     * @param string $expectedValue
-     * @param mixed  $value
-     *
      * @dataProvider provideValues
      */
-    public function testFormatValue($value, $expectedValue): void
+    public function testFormatValue(mixed $value, string $expectedValue): void
     {
         self::assertSame($expectedValue, formatValue($value));
     }
