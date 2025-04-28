@@ -8,12 +8,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use WyriHaximus\PSR3\Utils;
 
 use function WyriHaximus\PSR3\formatValue;
 
 use const STDOUT;
 
-/** @internal */
 final class FormatValueTest extends TestCase
 {
     /** @return iterable<array<int, mixed>> */
@@ -64,6 +64,14 @@ final class FormatValueTest extends TestCase
     #[DataProvider('provideValues')]
     public function formatValue(mixed $value, string $expectedValue): void
     {
+        /** @phpstan-ignore function.deprecated */
         self::assertSame($expectedValue, formatValue($value));
+    }
+
+    #[Test]
+    #[DataProvider('provideValues')]
+    public function formatValueUtils(mixed $value, string $expectedValue): void
+    {
+        self::assertSame($expectedValue, Utils::formatValue($value));
     }
 }
