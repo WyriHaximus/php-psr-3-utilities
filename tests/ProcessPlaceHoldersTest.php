@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests\PSR3;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use function WyriHaximus\PSR3\processPlaceHolders;
 
-/**
- * @internal
- */
+/** @internal */
 final class ProcessPlaceHoldersTest extends TestCase
 {
-    /**
-     * @return iterable<array<int, array<string, string>|string>>
-     */
-    public function provideForTestProcessPlaceHolders(): iterable
+    /** @return iterable<array<int, array<string, string>|string>> */
+    public static function provideForTestProcessPlaceHolders(): iterable
     {
         yield [
             'foo.bar',
@@ -37,12 +35,10 @@ final class ProcessPlaceHoldersTest extends TestCase
         ];
     }
 
-    /**
-     * @param array<array<mixed>> $context
-     *
-     * @dataProvider provideForTestProcessPlaceHolders
-     */
-    public function testProcessPlaceHolders(string $message, array $context, string $expectedOutput): void
+    /** @param array<string, mixed> $context */
+    #[Test]
+    #[DataProvider('provideForTestProcessPlaceHolders')]
+    public function processPlaceHolders(string $message, array $context, string $expectedOutput): void
     {
         self::assertSame($expectedOutput, processPlaceHolders($message, $context));
     }

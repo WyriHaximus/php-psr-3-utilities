@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace WyriHaximus\Tests\PSR3;
 
 use JsonSerializable;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -12,15 +14,11 @@ use function WyriHaximus\PSR3\normalizeContext;
 
 use const STDOUT;
 
-/**
- * @internal
- */
+/** @internal */
 final class NormalizeContextTest extends TestCase
 {
-    /**
-     * @return iterable<array<mixed>>
-     */
-    public function provideContexts(): iterable
+    /** @return iterable<array<mixed>> */
+    public static function provideContexts(): iterable
     {
         yield [
             [],
@@ -56,6 +54,7 @@ final class NormalizeContextTest extends TestCase
                     'json_serializable' => new class () implements JsonSerializable {
                         /**
                          * @inheritDoc
+                         * @phpstan-ignore shipmonk.missingNativeReturnTypehint
                          */
                         public function jsonSerialize()
                         {
@@ -84,12 +83,12 @@ final class NormalizeContextTest extends TestCase
     }
 
     /**
-     * @param array<mixed> $context
-     * @param array<mixed> $expectedOutput
-     *
-     * @dataProvider provideContexts
+     * @param array<string, mixed> $context
+     * @param array<string, mixed> $expectedOutput
      */
-    public function testNormalizeContext(array $context, array $expectedOutput): void
+    #[Test]
+    #[DataProvider('provideContexts')]
+    public function normalizeContext(array $context, array $expectedOutput): void
     {
         self::assertSame($expectedOutput, normalizeContext($context));
     }
