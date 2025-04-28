@@ -17,14 +17,14 @@ composer require wyrihaximus/psr-3-utilities
 
 ## Functions ##
 
-* `processPlaceHolders` - Handle placeholders as specified in [PSR-3](http://www.php-fig.org/psr/psr-3/).
-* `formatValue` - Format any given value as a string.
-* `normalizeContext` - Normalize the context ensure resources are represented as strings.
-* `checkCorrectLogLevel` - Throw an `Psr\Log\InvalidArgumentException` when the passed log level isn't defined on `Psr\Log\LogLevel`.
+* `Utils::processPlaceHolders` - Handle placeholders as specified in [PSR-3](http://www.php-fig.org/psr/psr-3/).
+* `Utils::formatValue` - Format any given value as a string.
+* `Utils::normalizeContext` - Normalize the context ensure resources are represented as strings.
+* `Utils::checkCorrectLogLevel` - Throw an `Psr\Log\InvalidArgumentException` when the passed log level isn't defined on `Psr\Log\LogLevel`.
 
 ## Origins ##
 
-The origings of this packages came from the need of complying to [PSR-3](http://www.php-fig.org/psr/psr-3/) place holders. (Like 'message {key}'.) And I came out at [`Monolog`](https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php), initially the code was used on ['wyrihaximus/react-psr-3-loggly`](https://github.com/WyriHaximus/reactphp-psr-3-loggly) but extracted it into it's own package now that I needed it in more package.
+The origins of this packages came from the need of complying to [PSR-3](http://www.php-fig.org/psr/psr-3/) place holders. (Like 'message {key}'.) And I came out at [`Monolog`](https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php), initially the code was used on ['wyrihaximus/react-psr-3-loggly`](https://github.com/WyriHaximus/reactphp-psr-3-loggly) but extracted it into it's own package now that I needed it in more package.
 
 ## Contributing ##
 

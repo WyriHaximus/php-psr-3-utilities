@@ -9,12 +9,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use WyriHaximus\PSR3\Utils;
 
 use function WyriHaximus\PSR3\normalizeContext;
 
 use const STDOUT;
 
-/** @internal */
 final class NormalizeContextTest extends TestCase
 {
     /** @return iterable<array<mixed>> */
@@ -90,6 +90,18 @@ final class NormalizeContextTest extends TestCase
     #[DataProvider('provideContexts')]
     public function normalizeContext(array $context, array $expectedOutput): void
     {
+        /** @phpstan-ignore function.deprecated */
         self::assertSame($expectedOutput, normalizeContext($context));
+    }
+
+    /**
+     * @param array<string, mixed> $context
+     * @param array<string, mixed> $expectedOutput
+     */
+    #[Test]
+    #[DataProvider('provideContexts')]
+    public function normalizeContextUtils(array $context, array $expectedOutput): void
+    {
+        self::assertSame($expectedOutput, Utils::normalizeContext($context));
     }
 }

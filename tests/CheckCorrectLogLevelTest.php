@@ -8,12 +8,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\InvalidArgumentException;
+use WyriHaximus\PSR3\Utils;
 
 use function WyriHaximus\PSR3\checkCorrectLogLevel;
 
 use const WyriHaximus\PSR3\LOG_LEVELS;
 
-/** @internal */
 final class CheckCorrectLogLevelTest extends TestCase
 {
     /** @return iterable<array<string>> */
@@ -26,9 +26,17 @@ final class CheckCorrectLogLevelTest extends TestCase
 
     #[Test]
     #[DataProvider('provideCorrectLogLevels')]
-    public function testCorrectLogLevel(string $logLevel): void
+    public function correctLogLevel(string $logLevel): void
     {
+        /** @phpstan-ignore function.deprecated */
         self::assertTrue(checkCorrectLogLevel($logLevel));
+    }
+
+    #[Test]
+    #[DataProvider('provideCorrectLogLevels')]
+    public function correctLogLevelUtils(string $logLevel): void
+    {
+        self::assertTrue(Utils::checkCorrectLogLevel($logLevel));
     }
 
     /** @return iterable<array<string>> */
@@ -43,10 +51,20 @@ final class CheckCorrectLogLevelTest extends TestCase
 
     #[Test]
     #[DataProvider('provideInCorrectLogLevels')]
-    public function testIncorrectLogLevel(string $logLevel): void
+    public function incorrectLogLevel(string $logLevel): void
     {
         self::expectException(InvalidArgumentException::class);
 
+        /** @phpstan-ignore function.deprecated */
         checkCorrectLogLevel($logLevel);
+    }
+
+    #[Test]
+    #[DataProvider('provideInCorrectLogLevels')]
+    public function incorrectLogLevelUtils(string $logLevel): void
+    {
+        self::expectException(InvalidArgumentException::class);
+
+        Utils::checkCorrectLogLevel($logLevel);
     }
 }

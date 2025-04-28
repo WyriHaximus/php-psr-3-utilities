@@ -13,161 +13,31 @@
     },
     "mutators": {
         "@default": true,
-        "AssignmentEqual": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "CastFloat": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Histogram::observe"
-            ]
-        },
-        "CastInt": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "Concat": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Registry::key"
-            ]
-        },
-        "ConcatOperandRemoval": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Registry::key"
-            ]
-        },
-        "Continue_": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Histogram::observe"
-            ]
-        },
-        "Division": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "Equal": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "Increment": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "Identical": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "For_": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "FunctionCallRemoval": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Registry\\Summaries::summary",
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets",
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "GreaterThanOrEqualTo": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "GreaterThanOrEqualToNegotiation": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "LessThan": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "LessThanOrEqualTo": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::observe"
-            ]
-        },
-        "LessThanOrEqualToNegotiation": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::observe"
-            ]
-        },
-        "LessThanNegotiation": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "LogicalAnd": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "LogicalAndNegation": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "LogicalAndAllSubExprNegation": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "MethodCallRemoval": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Registry\\Summaries::summary",
-                "WyriHaximus\\Metrics\\InMemory\\Summary::observe"
-            ]
-        },
-        "Minus": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile",
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "Multiplication": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "NotIdentical": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::observe"
-            ]
-        },
-        "Plus": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "PublicVisibility": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\Factory::createWithConfiguration"
-            ]
-        },
-        "RoundingFamily": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        },
-        "UnwrapArrayKeys": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Summary::cleanUpBuckets"
-            ]
-        },
-        "UnwrapArrayValues": {
-            "ignore": [
-                "WyriHaximus\\Metrics\\InMemory\\Registry\\Summaries::summaries",
-                "WyriHaximus\\Metrics\\InMemory\\Summary::calculatePercentile"
-            ]
-        }
+        "ArrayOneItem": false,
+        "CastArray": false,
+        "CastString": false,
+        "Concat": false,
+        "ConcatOperandRemoval": false,
+        "Continue_": false,
+        "FalseValue": false,
+        "Foreach_": false,
+        "Identical": false,
+        "IfNegation": false,
+        "InstanceOf_": false,
+        "LogicalAnd": false,
+        "LogicalAndAllSubExprNegation": false,
+        "LogicalAndNegation": false,
+        "LogicalAndSingleSubExprNegation": false,
+        "LogicalNot": false,
+        "LogicalOr": false,
+        "LogicalOrAllSubExprNegation": false,
+        "LogicalOrNegation": false,
+        "LogicalOrSingleSubExprNegation": false,
+        "PublicVisibility": false,
+        "Throw_": false,
+        "TrueValue": false,
+        "UnwrapArrayKeys": false,
+        "UnwrapStrToLower": false
     },
     "phpUnit": {
         "configDir": "./etc/qa/"
