@@ -19,7 +19,7 @@ use function is_object;
 use function is_resource;
 use function is_scalar;
 use function method_exists;
-use function Safe\sprintf;
+use function sprintf;
 use function strpos;
 use function strtolower;
 use function strtr;
