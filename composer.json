@@ -10,8 +10,8 @@
     }
   ],
   "require": {
-    "php": "^8",
-    "ext-json": "^8",
+    "php": "^8.3",
+    "ext-json": "^8.3",
     "psr/log": "^3 || ^2"
   },
   "require-dev": {
