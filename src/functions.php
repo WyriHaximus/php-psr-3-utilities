@@ -43,9 +43,7 @@ const LOG_LEVELS = [
  * https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php file.
  */
 
-/**
- * @param  array<string, mixed> $context
- */
+/** @param  array<string, mixed> $context */
 function processPlaceHolders(string $message, array $context): string
 {
     if (strpos($message, '{') === false) {
@@ -86,10 +84,12 @@ function normalizeContext(array $context): array
         }
 
         if ($value instanceof DateTimeInterface) {
+            /** @phpstan-ignore-next-line */
             $value = (array) $value;
         }
 
         if (is_array($value)) {
+            /** @phpstan-ignore-next-line */
             $context[$index] = normalizeContext($value);
             continue;
         }
@@ -110,7 +110,7 @@ function checkCorrectLogLevel(string $level): bool
     $level = strtolower($level);
     if (! array_key_exists($level, LOG_LEVELS)) {
         throw new InvalidArgumentException(
-            'Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(LOG_LEVELS))
+            'Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(LOG_LEVELS)),
         );
     }
 

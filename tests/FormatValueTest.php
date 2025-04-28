@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WyriHaximus\Tests\PSR3;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -11,15 +13,11 @@ use function WyriHaximus\PSR3\formatValue;
 
 use const STDOUT;
 
-/**
- * @internal
- */
+/** @internal */
 final class FormatValueTest extends TestCase
 {
-    /**
-     * @return iterable<array<int, mixed>>
-     */
-    public function provideValues(): iterable
+    /** @return iterable<array<int, mixed>> */
+    public static function provideValues(): iterable
     {
         yield [
             null,
@@ -62,10 +60,9 @@ final class FormatValueTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider provideValues
-     */
-    public function testFormatValue(mixed $value, string $expectedValue): void
+    #[Test]
+    #[DataProvider('provideValues')]
+    public function formatValue(mixed $value, string $expectedValue): void
     {
         self::assertSame($expectedValue, formatValue($value));
     }
