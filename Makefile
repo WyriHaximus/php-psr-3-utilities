@@ -3,10 +3,13 @@ SHELL=bash
 
 .PHONY: *
 
-COMPOSER_SHOW_EXTENSION_LIST=$(shell composer show -t | grep -o "\-\-\(ext-\).\+" | sort | uniq | cut -d- -f4- | tr -d '\n' | grep . | sed  '/^$$/d' | xargs | sed -e 's/ /, /g' | tr -cd '[:alnum:],' | sed 's/.$$//')
+COMPOSER_SHOW_EXTENSION_LIST_PROD=$(shell composer show -t | grep -o "\-\-\(ext-\).\+" | sort | uniq | cut -d- -f4- | tr -d '\n' | grep . | sed  '/^$$/d' | xargs | sed -e 's/ /, /g' | tr -cd '[:alnum:],' | sed 's/.$$//')
+COMPOSER_SHOW_EXTENSION_LIST_DEV=$(shell composer show -s | grep -o "\(ext-\).\+" | sort | uniq | cut -d- -f2- | cut -d" " -f1 | xargs | sed -e 's/ /, /g' | tr -cd '[:alnum:],')
+COMPOSER_SHOW_EXTENSION_LIST=$(shell echo "${COMPOSER_SHOW_EXTENSION_LIST_PROD},${COMPOSER_SHOW_EXTENSION_LIST_DEV}")
 SLIM_DOCKER_IMAGE=$(shell php -r 'echo count(array_intersect(["gd", "vips"], explode(",", "${COMPOSER_SHOW_EXTENSION_LIST}"))) > 0 ? "" : "-slim";')
+NTS_OR_ZTS_DOCKER_IMAGE=$(shell php -r 'echo count(array_intersect(["parallel"], explode(",", "${COMPOSER_SHOW_EXTENSION_LIST}"))) > 0 ? "zts" : "nts";')
 PHP_VERSION:=$(shell docker run --rm -v "`pwd`:`pwd`" jess/jq jq -r -c '.config.platform.php' "`pwd`/composer.json" | php -r "echo str_replace('|', '.', explode('.', implode('|', explode('.', stream_get_contents(STDIN), 2)), 2)[0]);")
-CONTAINER_NAME=$(shell echo "ghcr.io/wyrihaximusnet/php:${PHP_VERSION}-nts-alpine${SLIM_DOCKER_IMAGE}-dev")
+CONTAINER_NAME=$(shell echo "ghcr.io/wyrihaximusnet/php:${PHP_VERSION}-${NTS_OR_ZTS_DOCKER_IMAGE}-alpine${SLIM_DOCKER_IMAGE}-dev")
 COMPOSER_CACHE_DIR=$(shell composer config --global cache-dir -q || echo ${HOME}/.composer-php/cache)
 COMPOSER_CONTAINER_CACHE_DIR=$(shell docker run --rm -it ${CONTAINER_NAME} composer config --global cache-dir -q || echo ${HOME}/.composer-php/cache)
 
@@ -35,7 +38,6 @@ endif
 all: ## Runs everything ####
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | grep -v "####" | awk 'BEGIN {FS = ":.*?## "}; {printf "%s\n", $$1}' | xargs --open-tty $(MAKE)
 
-
 syntax-php: ## Lint PHP syntax ##*LH*##
 	$(DOCKER_RUN) vendor/bin/parallel-lint --exclude vendor .
 
@@ -57,10 +59,10 @@ unit-testing-raw: ## Run tests ##*D*## ####
 	test -n "$(COVERALLS_REPO_TOKEN)" && test -n "$(COVERALLS_RUN_LOCALLY)" && test -f ./var/tests-unit-clover-coverage.xml && ./vendor/bin/php-coveralls -v --coverage_clover ./build/logs/clover.xml --json_path ./var/tests-unit-clover-coverage-upload.json || true
 
 mutation-testing: ## Run mutation testing ##*LCH*##
-	$(DOCKER_RUN) vendor/bin/infection --ansi --log-verbosity=all --threads=$(THREADS) || (cat ./var/infection.log && false)
+	$(DOCKER_RUN) vendor/bin/infection --ansi --log-verbosity=all --ignore-msi-with-no-mutations --threads=$(THREADS) || (cat ./var/infection.log && false)
 
 mutation-testing-raw: ## Run mutation testing ####
-	vendor/bin/infection --ansi --log-verbosity=all --threads=$(THREADS) || (cat ./var/infection.log && false)
+	vendor/bin/infection --ansi --log-verbosity=all --ignore-msi-with-no-mutations --threads=$(THREADS) || (cat ./var/infection.log && false)
 
 composer-require-checker: ## Ensure we require every package used in this package directly ##*C*##
 	$(DOCKER_RUN) vendor/bin/composer-require-checker --ignore-parse-errors --ansi -vvv --config-file=./etc/qa/composer-require-checker.json
@@ -88,6 +90,7 @@ outdated: ### Show outdated dependencies ####
 
 shell: ## Provides Shell access in the expected environment ####
 	$(DOCKER_RUN) bash
+
 
 help: ## Show this help ####
 	@printf "\033[33mUsage:\033[0m\n  make [target]\n\n\033[33mTargets:\033[0m\n"

@@ -110,9 +110,9 @@ final readonly class Utils
     public static function checkCorrectLogLevel(string $level): bool
     {
         $level = strtolower($level);
-        if (! array_key_exists($level, LOG_LEVELS)) {
+        if (! array_key_exists($level, self::LOG_LEVELS)) {
             throw new InvalidArgumentException(
-                'Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(LOG_LEVELS)),
+                'Level "' . $level . '" is not defined, use one of: ' . implode(', ', array_keys(self::LOG_LEVELS)),
             );
         }
 
