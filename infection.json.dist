@@ -33,7 +33,7 @@
         "LogicalOrAllSubExprNegation": false,
         "LogicalOrNegation": false,
         "LogicalOrSingleSubExprNegation": false,
-        "PublicVisibility": false,
+        "PublicVisibility": true,
         "Throw_": false,
         "TrueValue": false,
         "UnwrapArrayKeys": false,
