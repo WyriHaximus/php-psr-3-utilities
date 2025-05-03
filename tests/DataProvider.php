@@ -6,16 +6,16 @@ namespace WyriHaximus\Tests\PSR3;
 
 use JsonSerializable;
 use stdClass;
+use WyriHaximus\PSR3\Utils;
 
 use const STDOUT;
-use const WyriHaximus\PSR3\LOG_LEVELS;
 
 final class DataProvider
 {
     /** @return iterable<array<string>> */
     public static function correctLogLevels(): iterable
     {
-        foreach (LOG_LEVELS as $logLevel) {
+        foreach (Utils::LOG_LEVELS as $logLevel) {
             yield [$logLevel];
         }
     }
@@ -107,11 +107,7 @@ final class DataProvider
             [
                 [
                     'json_serializable' => new class () implements JsonSerializable {
-                        /**
-                         * @inheritDoc
-                         * @phpstan-ignore shipmonk.missingNativeReturnTypehint
-                         */
-                        public function jsonSerialize()
+                        public function jsonSerialize(): mixed
                         {
                             return ['foo' => 'bar'];
                         }

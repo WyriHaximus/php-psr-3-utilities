@@ -6,8 +6,7 @@ namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\TestCase;
-use WyriHaximus\PSR3\Utils;
+use WyriHaximus\TestUtilities\TestCase;
 
 use function WyriHaximus\PSR3\formatValue;
 
@@ -19,12 +18,5 @@ final class FormatValueTest extends TestCase
     {
         /** @phpstan-ignore function.deprecated */
         self::assertSame($expectedValue, formatValue($value));
-    }
-
-    #[Test]
-    #[DataProviderExternal(DataProvider::class, 'values')]
-    public function formatValueUtils(mixed $value, string $expectedValue): void
-    {
-        self::assertSame($expectedValue, Utils::formatValue($value));
     }
 }

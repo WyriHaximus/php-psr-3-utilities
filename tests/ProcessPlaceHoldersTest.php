@@ -6,8 +6,7 @@ namespace WyriHaximus\Tests\PSR3;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\TestCase;
-use WyriHaximus\PSR3\Utils;
+use WyriHaximus\TestUtilities\TestCase;
 
 use function WyriHaximus\PSR3\processPlaceHolders;
 
@@ -20,13 +19,5 @@ final class ProcessPlaceHoldersTest extends TestCase
     {
         /** @phpstan-ignore function.deprecated */
         self::assertSame($expectedOutput, processPlaceHolders($message, $context));
-    }
-
-    /** @param array<string, mixed> $context */
-    #[Test]
-    #[DataProviderExternal(DataProvider::class, 'processPlaceHolders')]
-    public function processPlaceHoldersUtils(string $message, array $context, string $expectedOutput): void
-    {
-        self::assertSame($expectedOutput, Utils::processPlaceHolders($message, $context));
     }
 }
