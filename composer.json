@@ -15,7 +15,7 @@
     "psr/log": "^2 || ^3"
   },
   "require-dev": {
-    "wyrihaximus/makefiles": "^0.3.4",
+    "wyrihaximus/makefiles": "^0.7.3",
     "wyrihaximus/test-utilities": "^7.0.0"
   },
   "autoload": {
