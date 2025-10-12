@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace WyriHaximus\PSR3;
 
+use Deprecated;
+
 /**
  * Logging levels PSR-3 LogLevel enum.
  */
@@ -14,36 +16,32 @@ const LOG_LEVELS = Utils::LOG_LEVELS;
  * https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php file.
  */
 
-/**
- * @deprecated Use Utils::processPlaceHolders instead
- *
- * @param  array<string, mixed> $context
- */
+/** @param  array<string, mixed> $context */
+#[Deprecated(message: 'Use Utils::processPlaceHolders instead')]
 function processPlaceHolders(string $message, array $context): string
 {
     return Utils::processPlaceHolders($message, $context);
 }
 
-/** @deprecated Use Utils::formatValue instead */
+#[Deprecated(message: 'Use Utils::formatValue instead')]
 function formatValue(mixed $value): string
 {
     return Utils::formatValue($value);
 }
 
 /**
- * @deprecated Use Utils::normalizeContext instead
- *
  * @param  array<string, mixed> $context
  *
  * @return  array<string, mixed>
  */
+#[Deprecated(message: 'Use Utils::normalizeContext instead')]
 function normalizeContext(array $context): array
 {
     return Utils::normalizeContext($context);
 }
 
-/** @deprecated Use Utils::checkCorrectLogLevel instead */
-function checkCorrectLogLevel(string $level): bool
+#[Deprecated(message: 'Use Utils::checkCorrectLogLevel instead')]
+function checkCorrectLogLevel(string $level): true
 {
     return Utils::checkCorrectLogLevel($level);
 }
