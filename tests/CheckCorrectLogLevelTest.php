@@ -17,7 +17,7 @@ final class CheckCorrectLogLevelTest extends TestCase
     #[DataProviderExternal(DataProvider::class, 'correctLogLevels')]
     public function correctLogLevel(string $logLevel): void
     {
-        /** @phpstan-ignore function.deprecated */
+        /** @phpstan-ignore function.deprecated,staticMethod.alreadyNarrowedType */
         self::assertTrue(checkCorrectLogLevel($logLevel));
     }
 

@@ -1,11 +1,10 @@
 parameters:
+	level: max
+	paths:
+		- ../../etc
+		- ../../src
+		- ../../tests
 	ergebnis:
 		noExtends:
 			classesAllowedToBeExtended:
-				- Psr\Log\AbstractLogger
 				- Psr\Log\Test\LoggerInterfaceTest
-	ignoreErrors:
-		-
-			identifier: shipmonk.deadMethod
-			path: ../../tests/DataProvider.php
-			count: 5

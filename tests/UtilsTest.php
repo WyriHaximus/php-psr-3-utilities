@@ -23,6 +23,7 @@ final class UtilsTest extends TestCase
     #[DataProviderExternal(DataProvider::class, 'correctLogLevels')]
     public function correctLogLevelUtils(string $logLevel): void
     {
+        /** @phpstan-ignore staticMethod.alreadyNarrowedType */
         self::assertTrue(Utils::checkCorrectLogLevel($logLevel));
     }
 

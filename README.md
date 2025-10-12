@@ -5,7 +5,6 @@
 [![Total Downloads](https://poser.pugx.org/WyriHaximus/psr-3-utilities/downloads.png)](https://packagist.org/packages/WyriHaximus/psr-3-utilities/stats)
 [![Code Coverage](https://scrutinizer-ci.com/g/WyriHaximus/php-psr-3-utilities/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WyriHaximus/php-psr-3-utilities/?branch=master)
 [![License](https://poser.pugx.org/WyriHaximus/psr-3-utilities/license.png)](https://packagist.org/packages/wyrihaximus/psr-3-utilities)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WyriHaximus/php-psr-3-utilities/badge.svg)](https://travis-ci.org/WyriHaximus/php-psr-3-utilities)
 
 ### Installation ###
 
@@ -32,7 +31,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License ##
 
-Copyright 2022 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
+Copyright 2025 [Cees-Jan Kiewiet](http://wyrihaximus.net/)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

@@ -20,7 +20,7 @@ use function is_resource;
 use function is_scalar;
 use function method_exists;
 use function sprintf;
-use function strpos;
+use function str_contains;
 use function strtolower;
 use function strtr;
 
@@ -48,7 +48,7 @@ final readonly class Utils
     /** @param array<string, mixed> $context */
     public static function processPlaceHolders(string $message, array $context): string
     {
-        if (strpos($message, '{') === false) {
+        if (! str_contains($message, '{')) {
             return $message;
         }
 
@@ -107,7 +107,7 @@ final readonly class Utils
         return $context;
     }
 
-    public static function checkCorrectLogLevel(string $level): bool
+    public static function checkCorrectLogLevel(string $level): true
     {
         $level = strtolower($level);
         if (! array_key_exists($level, self::LOG_LEVELS)) {
