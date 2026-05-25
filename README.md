@@ -21,6 +21,40 @@ composer require wyrihaximus/psr-3-utilities
 * `Utils::normalizeContext` - Normalize the context ensure resources are represented as strings.
 * `Utils::checkCorrectLogLevel` - Throw an `Psr\Log\InvalidArgumentException` when the passed log level isn't defined on `Psr\Log\LogLevel`.
 
+## Test ProcessPlaceHoldersLogger ##
+
+To help write strict unit tests with [`colinodell/psr-testlogger`](https://github.com/colinodell/psr-testlogger). Consider
+the following real life example of need to match very specific `type` values in the logs:
+
+
+```php
+$filesystem = Factory::create();
+
+$logger   = new TestLogger();
+$producer = Mockery::mock(Producer::class);
+$producer->shouldReceive('send')->withArgs(static function (File $file): bool {
+    if ($file->type !== 'space' && $file->type !== 'hallow-azeroth') {
+        return false;
+    }
+
+    return $file->file === $file->type . '.jpg';
+});
+
+new RootFiles(
+    new ProcessPlaceHoldersLogger($logger),
+    $filesystem->directory(__DIR__ . '/data/maptiles/'),
+    $producer,
+    new Registry(Configuration::create()),
+)->perform();
+
+self::assertTrue($logger->hasDebugThatContains('Scanning types'));
+self::assertTrue($logger->hasDebugThatContains('Scanning for root files in space'));
+self::assertTrue($logger->hasInfoThatContains('Found for upload: space.jpg'));
+self::assertTrue($logger->hasDebugThatContains('Scanning for root files in hallow-azeroth'));
+self::assertTrue($logger->hasInfoThatContains('Found for upload: hallow-azeroth.jpg'));
+self::assertTrue($logger->hasDebugThatContains('Done scanning types'));
+```
+
 ## Origins ##
 
 The origins of this packages came from the need of complying to [PSR-3](http://www.php-fig.org/psr/psr-3/) place holders. (Like 'message {key}'.) And I came out at [`Monolog`](https://github.com/Seldaek/monolog/blob/6e6586257d9fb231bf039563632e626cdef594e5/src/Monolog/Processor/PsrLogMessageProcessor.php), initially the code was used on ['wyrihaximus/react-psr-3-loggly`](https://github.com/WyriHaximus/reactphp-psr-3-loggly) but extracted it into it's own package now that I needed it in more package.
