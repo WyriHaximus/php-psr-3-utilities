@@ -12,9 +12,10 @@
         "perMutator": "../../var/infection-per-mutator.md",
         "github": true
     },
+    "minMsi": 100,
+    "minCoveredMsi": 100,
+    "ignoreMsiWithNoMutations": true,
     "mutators": {
         "@default": true
-    },
-    "minMsi": 100,
-    "minCoveredMsi": 100
+    }
 }
