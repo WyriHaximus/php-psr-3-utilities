@@ -86,12 +86,12 @@ final readonly class Utils
             }
 
             if ($value instanceof DateTimeInterface) {
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore shipmonk.variableTypeOverwritten,shipmonk.forbiddenCast */
                 $value = (array) $value;
             }
 
             if (is_array($value)) {
-                /** @phpstan-ignore-next-line */
+                /** @phpstan-ignore argument.type */
                 $context[$index] = self::normalizeContext($value);
                 continue;
             }
