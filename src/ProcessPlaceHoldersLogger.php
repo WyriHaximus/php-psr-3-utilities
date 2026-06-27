@@ -17,10 +17,7 @@ final readonly class ProcessPlaceHoldersLogger implements LoggerInterface
     {
     }
 
-    /**
-     * @inheritdoc
-     * @phpstan-ignore typeCoverage.paramTypeCoverage
-     */
+    /** @inheritdoc */
     public function log($level, Stringable|string $message, array $context = []): void
     {
         /** @phpstan-ignore psr3.interpolated,argument.type */
